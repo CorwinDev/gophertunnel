@@ -381,11 +381,10 @@ func (d *Decoder) unmarshalTag(val reflect.Value, t tagType, tagName string) err
 					if err = d.unmarshalTag(field, nestedTagType, nestedTagName); err != nil {
 						return err
 					}
-					continue
 				}
+				continue
 				// We return an error if the struct does not have one of the fields found in the compound. It
 				// is rather important no data is lost during the decoding.
-				return UnexpectedNamedTagError{Off: d.r.off, TagName: tagName + "." + nestedTagName, TagType: nestedTagType}
 			}
 			// Finally we delete all fields in the map and return it to the sync.Pool so that it may be
 			// re-used by the next operation.
